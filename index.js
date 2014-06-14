@@ -33,16 +33,16 @@ socket.on('channel_data', function(channel, data) {
   data = JSON.parse(data);
   delete data.headers.host; // Public host != private host
 
-  var channel_config = nconf.get('channels:'+channel);
+  var server = nconf.get('channels:'+channel);
 
-  if (!channel_config) {
+  if (!server) {
     //console.log('channel_data', channel, data);
     console.log('Unable to handle ', channel);
     return;
   }
 
   /* Use data from socket server to build a nice url */
-  var parsed_url = url.parse(channel_config.server);
+  var parsed_url = url.parse(server);
   parsed_url.pathname = path.join(parsed_url.pathname, data.path);
   if (data.query) {
     delete parsed_url.search;
