@@ -4,16 +4,18 @@ var io = require('socket.io-client');
 var request = require('request');
 var url = require('url');
 var path = require('path');
+var nconf = require('nconf');
 
-/* TODO: Figure out a nice solution to have config.local */
-var config = require('./config.js');
+nconf.add('global', { type: 'file', file: './config.json' });
+nconf.add('user', { type: 'file', file: './config.local.json' });
+nconf.load();
 
 var agent;
 if (process.env.http_proxy) {
   agent = HttpProxyAgent.new(process.env.http_proxy);
 }
 
-var socket = io.connect(config.socket_server, { agent: agent });
+var socket = io.connect(nconf.get('socket_server'), { agent: agent });
 
 socket.on('connect_error', function() { console.log('connect_error', arguments); });
 socket.on('error', function() { console.log('error', arguments); });
@@ -22,7 +24,7 @@ socket.on('connect', function() { console.log('connected', arguments); });
 
 socket.on('request_channels', function() {
   console.log('requesting channels');
-  Object.keys(config.channels).forEach(function(channel) {
+  Object.keys(nconf.get('channels')).forEach(function(channel) {
     socket.emit('listen_channel', channel);
   });
 });
@@ -31,7 +33,7 @@ socket.on('channel_data', function(channel, data) {
   data = JSON.parse(data);
   delete data.headers.host; // Public host != private host
 
-  var channel_config = config.channels[channel];
+  var channel_config = nconf.get('channels:'+channel);
 
   if (!channel_config) {
     //console.log('channel_data', channel, data);
@@ -56,7 +58,7 @@ socket.on('channel_data', function(channel, data) {
     body: data.body,
   }, function(error, response, body) {
     if (error || response.statusCode !== 200) {
-      console.log('Unable to connect to target:', body);
+      console.log('Unable to connect to target(' + parsed_url + '):', body);
     } else {
       console.log('Submitted to ' + parsed_url);
     }

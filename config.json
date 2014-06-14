@@ -1,0 +1,6 @@
+{
+  "asocket_server": "http://localhost:3000/",
+  "channels": {
+    "gavin": "http://localhost/dev_app"
+  }
+}
