@@ -5,6 +5,7 @@ var request = require('request');
 var url = require('url');
 var path = require('path');
 var nconf = require('nconf');
+var _ = require('underscore');
 
 nconf.add('global', { type: 'file', file: './config.json' });
 nconf.add('user', { type: 'file', file: './config.local.json' });
@@ -42,11 +43,11 @@ socket.on('channel_data', function(channel, data) {
   }
 
   /* Use data from socket server to build a nice url */
-  var parsed_url = url.parse(server);
+  var parsed_url = url.parse(server, true);
   parsed_url.pathname = path.join(parsed_url.pathname, data.path);
   if (data.query) {
     delete parsed_url.search;
-    parsed_url.query = data.query;
+    parsed_url.query = _.extend(parsed_url.query,data.query);
   }
   parsed_url = url.format(parsed_url);
 
