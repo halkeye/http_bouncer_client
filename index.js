@@ -7,8 +7,9 @@ var path = require('path');
 var nconf = require('nconf');
 var _ = require('underscore');
 
-nconf.add('global', { type: 'file', file: './config.json' });
+// nconf goes from earliest to latest
 nconf.add('user', { type: 'file', file: './config.local.json' });
+nconf.add('global', { type: 'file', file: './config.json' });
 nconf.load();
 
 var agent;
