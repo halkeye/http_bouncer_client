@@ -13,8 +13,8 @@ nconf.add('global', { type: 'file', file: './config.json' });
 nconf.load();
 
 var agent;
-if (process.env.http_proxy) {
-  agent = HttpProxyAgent.new(process.env.http_proxy);
+if (process.env.http_proxy && /http:\/\//.test(nconf.get('socket_server'))) {
+  agent = new HttpProxyAgent(process.env.http_proxy);
 }
 
 var socket = io.connect(nconf.get('socket_server'), { agent: agent });
