@@ -17,12 +17,13 @@ if (process.env.http_proxy && /http:\/\//.test(nconf.get('socket_server'))) {
   agent = new HttpProxyAgent(process.env.http_proxy);
 }
 
+
 var socket = io.connect(nconf.get('socket_server'), { agent: agent });
 
 socket.on('connect_error', function() { console.log('connect_error', arguments); });
 socket.on('error', function() { console.log('error', arguments); });
 socket.on('event', function(data){ console.log('event', data); });
-socket.on('connect', function() { console.log('connected', arguments); });
+socket.on('connect', function() { console.log('connected to ' + this.io.uri); });
 
 socket.on('request_channels', function() {
   console.log('requesting channels');
