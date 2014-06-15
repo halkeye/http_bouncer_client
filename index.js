@@ -33,7 +33,6 @@ socket.on('request_channels', function() {
 });
 
 socket.on('channel_data', function(channel, data) {
-  data = JSON.parse(data);
   delete data.headers.host; // Public host != private host
 
   var server = nconf.get('channels:'+channel);
