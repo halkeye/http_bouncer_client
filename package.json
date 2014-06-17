@@ -1,11 +1,23 @@
 {
   "name": "http_bouncer_client",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Client for the http_bouncer_service",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node ./bin/http_bouncer_client"
   },
+  "bugs": {
+    "url": "https://github.com/halkeye/http_bouncer_client/issues",
+    "emails": "http_bouncer_client@kodekoan.com"
+  },
+  "bin": {
+    "http_bouncer_client": "./bin/http_bouncer_client.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/halkeye/http_bouncer_client"
+  },
+  "preferGlobal": true,
   "author": "Gavin Mogan <gavin@kodekoan.com> (http://www.kodekoan.com)",
   "license": "MIT",
   "dependencies": {
@@ -13,7 +25,7 @@
     "http-proxy-agent": "~0.2.6",
     "https-proxy-agent": "~0.3.5",
     "request": "~2.36.0",
-    "nconf": "~0.6.9",
-    "underscore": "~1.6.0"
+    "underscore": "~1.6.0",
+    "commander": "~2.2.0"
   }
 }
