@@ -10,7 +10,7 @@ program.option('-s, --server [server]', 'Socket Server (Default: http://localhos
 program.option('-c, --channels [value]', 'Channels to listen to (format is keyname:server)', channels, []);
 program.parse(process.argv);
 
-var client = new require('../index.js');
+var client = new require('../index.js')();
 client.setServer(program.server);
 program.channels.forEach(function(val) {
   /* Start listening to Channels in config file */
