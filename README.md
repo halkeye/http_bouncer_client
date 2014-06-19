@@ -21,13 +21,17 @@ Have an `http_bouncer_server` up and running
 ### 2) Custom script mode
 
 
-    var client = new require('http_bouncer_client');
+    var client = new require('http_bouncer_client')();
     client.setServer('http://other-server-blah-blah/');
     client.addChannel('gavin', 'http://localhost/dev_application?query_string_to_merge=1');
     client.addChannel('gavin2', 'http://localhost/dever_application?query_string_to_merge=1');
     client.start();
 
 ## Release History
+
+0.0.2 - 2014-06-19
+
+* Fix bug with bin client
 
 0.0.1 - 2014-06-17
 
