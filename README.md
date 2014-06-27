@@ -29,6 +29,10 @@ Have an `http_bouncer_server` up and running
 
 ## Release History
 
+0.0.3 - 2014-06-27
+
+* Fix another bug with bin client (-c now works)
+
 0.0.2 - 2014-06-19
 
 * Fix bug with bin client
