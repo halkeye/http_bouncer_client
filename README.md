@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/halkeye/http_bouncer_client.png?label=ready&title=Ready)](https://waffle.io/halkeye/http_bouncer_client)
 # http_bouncer_client
 
 [![Build Status](https://travis-ci.org/halkeye/http_bouncer_client.png?branch=master)](https://travis-ci.org/halkeye/http_bouncer_client)
