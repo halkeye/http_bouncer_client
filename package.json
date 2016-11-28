@@ -22,10 +22,10 @@
   "license": "MIT",
   "dependencies": {
     "socket.io-client": "^1.0.4",
-    "http-proxy-agent": "~0.2.6",
-    "https-proxy-agent": "~0.3.5",
-    "request": "~2.36.0",
-    "underscore": "~1.6.0",
-    "commander": "~2.2.0"
+    "http-proxy-agent": "~1.0.0",
+    "https-proxy-agent": "~1.0.0",
+    "request": "~2.78.0",
+    "underscore": "~1.8.3",
+    "commander": "~2.9.0"
   }
 }
