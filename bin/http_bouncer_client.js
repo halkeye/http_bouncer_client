@@ -1,4 +1,4 @@
-#!/usr/bin/env nodejs
+#!/usr/bin/env node
 
 var package = require(require('path').resolve(__dirname + '/../package.json'));
 
@@ -10,8 +10,17 @@ function channels(val, c) {
 
 var program = require('commander');
 program.version(package.version);
-program.option('-s, --server [server]', 'Socket Server (Default: http://localhost:3000/)', 'http://localhost:3000/');
-program.option('-c, --channels [value]', 'Channels to listen to (format is keyname:server)', channels, []);
+program.option(
+  '-s, --server [server]',
+  'Socket Server (Default: http://localhost:3000/)',
+  'http://localhost:3000/'
+);
+program.option(
+  '-c, --channels [value]',
+  'Channels to listen to (format is keyname:server)',
+  channels,
+  []
+);
 program.parse(process.argv);
 
 var client = new require('../index.js')();
