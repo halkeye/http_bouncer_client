@@ -22,6 +22,12 @@
   "engines": {
     "node": ">= 8"
   },
+  "files": [
+    "bin/http_bouncer_client.js",
+    "index.js",
+    "LICENSE",
+    "README.md"
+  ],
   "author": "Gavin Mogan <github@gavinmogan.com> (http://www.gavinmogan.com/)",
   "license": "MIT",
   "devDependencies": {
