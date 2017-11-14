@@ -1,6 +1,6 @@
 {
   "name": "http_bouncer_client",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Client for the http_bouncer_service",
   "main": "index.js",
   "scripts": {
