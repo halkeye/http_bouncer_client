@@ -1,6 +1,6 @@
 # http_bouncer_client
 
-[![Build Status](https://travis-ci.org/halkeye/http_bouncer_client.png?branch=master)](https://travis-ci.org/halkeye/http_bouncer_client)
+[![Build Status](https://travis-ci.org/halkeye/http_bouncer_client.png?branch=master)](https://travis-ci.org/halkeye/http_bouncer_client) [![Greenkeeper badge](https://badges.greenkeeper.io/halkeye/http_bouncer_client.svg)](https://greenkeeper.io/)
 
 Simple app that talks to `http_bouncer_server` using and replays http hits
 
