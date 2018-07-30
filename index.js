@@ -8,9 +8,11 @@ let _ = require('underscore');
 
 module.exports = function () {
   let socket;
-  let socket_server = 'http://localhost:3000/';
+  let socketServer = 'http://localhost:3000/';
   let channels = {};
-  this.setServer = function (value) { socket_server = value; };
+  this.setServer = function (value) {
+    socketServer = value;
+  };
   this.addChannel = function (channel, server) {
     if (channels[channel]) {
       console.trace('WARNING - Already listening to ' + channel);
@@ -21,13 +23,16 @@ module.exports = function () {
     }
   };
 
-  let listen = function (socket_server) {
+  let listen = function (socketServer) {
     let agent;
-    if (process.env.http_proxy && /http:\/\//.test(socket_server)) {
+    if (process.env.http_proxy && /http:\/\//.test(socketServer)) {
       agent = new HttpProxyAgent(process.env.http_proxy);
     }
 
-    return io.connect(socket_server, { agent: agent });
+    return io.connect(
+      socketServer,
+      { agent: agent }
+    );
   };
 
   this.start = function () {
@@ -35,12 +40,20 @@ module.exports = function () {
       console.log('WARNING - no channels to listen to');
     }
 
-    socket = listen(socket_server);
+    socket = listen(socketServer);
 
-    socket.on('connect_error', function () { console.log('connect_error', arguments); });
-    socket.on('error', function () { console.log('error', arguments); });
-    socket.on('event', function (data) { console.log('event', data); });
-    socket.on('connect', function () { console.log('connected to ' + this.io.uri); });
+    socket.on('connect_error', function () {
+      console.log('connect_error', arguments);
+    });
+    socket.on('error', function () {
+      console.log('error', arguments);
+    });
+    socket.on('event', function (data) {
+      console.log('event', data);
+    });
+    socket.on('connect', function () {
+      console.log('connected to ' + this.io.uri);
+    });
 
     socket.on('request_channels', function () {
       Object.keys(channels).forEach(function (channel) {
@@ -60,29 +73,35 @@ module.exports = function () {
       }
 
       /* Use data from socket server to build a nice url */
-      let parsed_url = url.parse(server, true);
-      parsed_url.pathname = path.join(parsed_url.pathname, data.path);
+      let parsedUrl = url.parse(server, true);
+      parsedUrl.pathname = path.join(parsedUrl.pathname, data.path);
       if (data.query) {
-        delete parsed_url.search;
-        parsed_url.query = _.extend(parsed_url.query, data.query);
+        delete parsedUrl.search;
+        parsedUrl.query = _.extend(parsedUrl.query, data.query);
       }
-      parsed_url = url.format(parsed_url);
+      parsedUrl = url.format(parsedUrl);
 
       /* POST/GET that sucka */
-      request({
-        url: parsed_url,
-        method: data.method,
-        headers: data.headers,
-        body: data.body
-      }, function (error, response, body) {
-        if (error || response.statusCode !== 200) {
-          // FIXME - emit('error, ....);
-          console.log('Unable to connect to target(' + parsed_url + '):', body);
-        } else {
-          // FIXME - emit('success, ....);
-          console.log('Submitted to ' + parsed_url);
+      request(
+        {
+          url: parsedUrl,
+          method: data.method,
+          headers: data.headers,
+          body: data.body
+        },
+        function (error, response, body) {
+          if (error || response.statusCode !== 200) {
+            // FIXME - emit('error, ....);
+            console.log(
+              'Unable to connect to target(' + parsedUrl + '):',
+              body
+            );
+          } else {
+            // FIXME - emit('success, ....);
+            console.log('Submitted to ' + parsedUrl);
+          }
         }
-      });
+      );
     });
   };
   return this;

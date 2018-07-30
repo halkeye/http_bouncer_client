@@ -1,15 +1,18 @@
 #!/usr/bin/env node
 
-var package = require(require('path').resolve(__dirname + '/../package.json'));
+const path = require('path');
+const packageJSON = require(require('path').resolve(
+  path.join(__dirname, '/../package.json')
+));
 
-function channels(val, c) {
-  var vals = val.split(':');
+function channels (val, c) {
+  const vals = val.split(':');
   c.push([vals.shift(), vals.join(':')]);
   return c;
 }
 
-var program = require('commander');
-program.version(package.version);
+const program = require('commander');
+program.version(packageJSON.version);
 program.option(
   '-s, --server [server]',
   'Socket Server (Default: http://localhost:3000/)',
@@ -23,9 +26,10 @@ program.option(
 );
 program.parse(process.argv);
 
-var client = new require('../index.js')();
+const App = require('../index.js');
+const client = new App();
 client.setServer(program.server);
-program.channels.forEach(function(val) {
+program.channels.forEach(function (val) {
   /* Start listening to Channels in config file */
   client.addChannel(val[0], val[1]);
 });
