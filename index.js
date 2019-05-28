@@ -73,6 +73,7 @@ module.exports = function () {
       }
 
       /* Use data from socket server to build a nice url */
+      // eslint-disable-next-line node/no-deprecated-api
       let parsedUrl = url.parse(server, true);
       parsedUrl.pathname = path.join(parsedUrl.pathname, data.path);
       if (data.query) {
