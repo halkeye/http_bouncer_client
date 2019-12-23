@@ -45,7 +45,7 @@
     "nodemon": "^2.0.0",
     "prettier-eslint": "^9.0.0",
     "prettier-eslint-cli": "^5.0.0",
-    "sinon": "^7.3.2"
+    "sinon": "^8.0.1"
   },
   "dependencies": {
     "socket.io-client": "^2.1.1",
