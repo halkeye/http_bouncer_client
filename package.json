@@ -53,6 +53,6 @@
     "https-proxy-agent": "~3.0.0",
     "request": "~2.88.0",
     "underscore": "~1.9.1",
-    "commander": "~4.0.0"
+    "commander": "~4.1.0"
   }
 }
