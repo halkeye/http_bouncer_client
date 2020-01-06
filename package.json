@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "socket.io-client": "^2.1.1",
-    "http-proxy-agent": "~2.1.0",
+    "http-proxy-agent": "~3.0.0",
     "https-proxy-agent": "~3.0.0",
     "request": "~2.88.0",
     "underscore": "~1.9.1",
